@@ -1,0 +1,25 @@
+# Commands to generate the highly inbred and the moderately inbred simulated data sets 
+
+# The following files are needed:
+   seeds
+   src_[scenario]/
+    fwrd.slim
+    recomb_rates.tsv
+    recap_w_pyslim.py
+    ibd_neumut.py
+    recodevcf.R
+
+# generate one replicate
+    # 1. run foward simulation using SLiM
+    slim -t -m -s [seed] fwrd.slim
+
+    # 2. recapitation
+    python3 recap_w_pyslim.py [seed]
+
+    # 3. print HBD segments for individuals in the last generation and overlay mutations
+    python3 ibd_neumut.py [seed]
+
+    # 4. Recode #CHROM and POS field on the vcf file
+    Rscript recodevcf.R
+
+
