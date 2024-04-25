@@ -1,17 +1,29 @@
 [![License: GPL-2.0](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
 
-# Commands to generate the highly inbred and the moderately inbred simulated data sets 
+# Scripts to generate the moderately inbred (modf) and highly inbred (highf) simulated data sets
 
-# The following files are needed:
-   seeds
-   src_[scenario]/
-    fwrd.slim
-    recomb_rates.tsv
-    recap_w_pyslim.py
-    ibd_neumut.py
-    recodevcf.R
+# Packages and compilers used:
+- For the forward simulation:
+  - SLiM version 4.0.1
+- For recapitation, HBD segments computation and overlaying mutations:
+  - Python/3.9.6-GCCcore-11.2.0
+  - SciPy-bundle/2021.10-foss-2021b
 
-# generate one replicate
+# Python external libraries:
+- tskit version: 0.5.4
+- msprime version: 1.2.0
+- pyslim version: 1.0b1
+
+# Needed files:
+seeds
+src_[scenario]/
+  fwrd.slim
+  recomb_rates.tsv
+  recap_w_pyslim.py
+  ibd_neumut.py
+  recodevcf.R
+
+# To produce one replicate of the simulation
     # 1. run foward simulation using SLiM
     slim -t -m -s [seed] fwrd.slim
 
