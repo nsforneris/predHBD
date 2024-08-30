@@ -1,0 +1,8 @@
+R scripts necessary to obtain:
+
+- true genome-wide reference inbreeding using simulated data (simulated_global_truef.R)
+
+- true locus-specific reference inbreeding (HBD probabilities and inferred HBD class)using simulated data (simulated_local_truef.R)
+
+- estimates of genome-wide reference inbreeding and locus-specific reference HBD (probabilities or inferred class) in the real data (real_ZooRoH_Mix7L_reference.R, real_referenceF.R)
+  estimates are obtained by running a Mix7L ZooRoH model with the RZooRoH package (https://cran.r-project.org/web/packages/RZooRoH/)

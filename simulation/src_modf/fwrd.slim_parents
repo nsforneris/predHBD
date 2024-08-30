@@ -1,0 +1,45 @@
+initialize() {
+   initializeSex("A");
+   initializeTreeSeq(timeUnit="generations");
+   initializeMutationRate(0.0);
+   initializeMutationType("m1", 0.5, "f", 0.0);
+   initializeGenomicElementType("g1", m1, 1.0);
+
+   initializeGenomicElement(g1, 0, 2499999999);
+
+   lines = readFile("recomb_rates.tsv");
+   header = strsplit(lines[0], "\t");
+   if (header[0] != "end_position"
+    | header[1] != "rate(cM/Mb)") {
+      stop("Unexpected format!");
+   }
+   rates = NULL;
+   ends = NULL;
+   nwindows = length(lines) - 1;
+   for (line in lines[1:nwindows]) {
+     components = strsplit(line, "\t");
+     ends = c(ends, asInteger(components[0]));
+     rates = c(rates, asFloat(components[1]));
+   }
+   initializeRecombinationRate(rates * 1e-8, ends);
+
+}
+
+1 early() { sim.addSubpop("p1", 10000);
+            p1.setSexRatio(0.1);
+            p1.setSubpopulationSize(5000);
+}
+51 early() { p1.setSubpopulationSize(1000); }
+81 early() { p1.setSubpopulationSize(500); }
+86:90 late() {
+ inds = sim.subpopulations.individuals;
+ sim.treeSeqRememberIndividuals(inds);
+}
+91 early() { p1.setSubpopulationSize(250); }
+91:99 late() {
+ inds = sim.subpopulations.individuals;
+ sim.treeSeqRememberIndividuals(inds);
+}
+100 late() {
+   sim.treeSeqOutput("fwrd_parents.trees");
+}

@@ -1,0 +1,4 @@
+# global_preds.R and local_preds.R:
+- collect the raw results of all prediction methods and compute genome-wide and locus-specific inbreeding predictions with them
+- merge the predictions with the reference inbreeding estimates in a unified table (one for genome-wide, one for locus-specific) for later performance evaluation and comparison
+  

@@ -1,0 +1,129 @@
+# Don't include the marker positions, allele frequencies and data in the output
+# file.
+set printlevel 3
+
+input marker data file       "./data.markers"
+output overwrite scores file "./phased_2011.qibd"
+output overwrite extra file  "./phased_2011.ids"
+
+# The following five Morgan parameter statements are the new parameter
+# statements added while implementing ibd_haplo as a Morgan program:
+
+select 2011 state transition matrix
+select phased data
+
+set population kinship              0.05
+set kinship change rate             0.05
+set transition matrix null fraction 0.05
+
+set genotyping error rate           0.01
+output four-gamete state order jacquard
+
+# The following Morgan parameter statements are being used to specify which
+# proband gametes to include in each analysis run by ibd_haplo.
+set scoreset 1 proband gametes tsk_250 0 tsk_250 1 tsk_477 0 tsk_477 1
+set scoreset 2 proband gametes tsk_251 0 tsk_251 1 tsk_494 0 tsk_494 1
+set scoreset 3 proband gametes tsk_253 0 tsk_253 1 tsk_496 0 tsk_496 1
+set scoreset 4 proband gametes tsk_254 0 tsk_254 1 tsk_499 0 tsk_499 1
+set scoreset 5 proband gametes tsk_255 0 tsk_255 1 tsk_499 0 tsk_499 1
+set scoreset 6 proband gametes tsk_256 0 tsk_256 1 tsk_499 0 tsk_499 1
+set scoreset 7 proband gametes tsk_258 0 tsk_258 1 tsk_492 0 tsk_492 1
+set scoreset 8 proband gametes tsk_258 0 tsk_258 1 tsk_494 0 tsk_494 1
+set scoreset 9 proband gametes tsk_260 0 tsk_260 1 tsk_476 0 tsk_476 1
+set scoreset 10 proband gametes tsk_270 0 tsk_270 1 tsk_486 0 tsk_486 1
+set scoreset 11 proband gametes tsk_270 0 tsk_270 1 tsk_490 0 tsk_490 1
+set scoreset 12 proband gametes tsk_271 0 tsk_271 1 tsk_491 0 tsk_491 1
+set scoreset 13 proband gametes tsk_272 0 tsk_272 1 tsk_481 0 tsk_481 1
+set scoreset 14 proband gametes tsk_273 0 tsk_273 1 tsk_479 0 tsk_479 1
+set scoreset 15 proband gametes tsk_276 0 tsk_276 1 tsk_494 0 tsk_494 1
+set scoreset 16 proband gametes tsk_280 0 tsk_280 1 tsk_488 0 tsk_488 1
+set scoreset 17 proband gametes tsk_283 0 tsk_283 1 tsk_477 0 tsk_477 1
+set scoreset 18 proband gametes tsk_284 0 tsk_284 1 tsk_491 0 tsk_491 1
+set scoreset 19 proband gametes tsk_285 0 tsk_285 1 tsk_476 0 tsk_476 1
+set scoreset 20 proband gametes tsk_285 0 tsk_285 1 tsk_485 0 tsk_485 1
+set scoreset 21 proband gametes tsk_285 0 tsk_285 1 tsk_486 0 tsk_486 1
+set scoreset 22 proband gametes tsk_293 0 tsk_293 1 tsk_484 0 tsk_484 1
+set scoreset 23 proband gametes tsk_295 0 tsk_295 1 tsk_480 0 tsk_480 1
+set scoreset 24 proband gametes tsk_297 0 tsk_297 1 tsk_486 0 tsk_486 1
+set scoreset 25 proband gametes tsk_298 0 tsk_298 1 tsk_484 0 tsk_484 1
+set scoreset 26 proband gametes tsk_301 0 tsk_301 1 tsk_485 0 tsk_485 1
+set scoreset 27 proband gametes tsk_304 0 tsk_304 1 tsk_478 0 tsk_478 1
+set scoreset 28 proband gametes tsk_306 0 tsk_306 1 tsk_489 0 tsk_489 1
+set scoreset 29 proband gametes tsk_308 0 tsk_308 1 tsk_497 0 tsk_497 1
+set scoreset 30 proband gametes tsk_311 0 tsk_311 1 tsk_479 0 tsk_479 1
+set scoreset 31 proband gametes tsk_311 0 tsk_311 1 tsk_480 0 tsk_480 1
+set scoreset 32 proband gametes tsk_313 0 tsk_313 1 tsk_498 0 tsk_498 1
+set scoreset 33 proband gametes tsk_315 0 tsk_315 1 tsk_494 0 tsk_494 1
+set scoreset 34 proband gametes tsk_320 0 tsk_320 1 tsk_479 0 tsk_479 1
+set scoreset 35 proband gametes tsk_320 0 tsk_320 1 tsk_490 0 tsk_490 1
+set scoreset 36 proband gametes tsk_324 0 tsk_324 1 tsk_476 0 tsk_476 1
+set scoreset 37 proband gametes tsk_324 0 tsk_324 1 tsk_487 0 tsk_487 1
+set scoreset 38 proband gametes tsk_325 0 tsk_325 1 tsk_491 0 tsk_491 1
+set scoreset 39 proband gametes tsk_328 0 tsk_328 1 tsk_476 0 tsk_476 1
+set scoreset 40 proband gametes tsk_330 0 tsk_330 1 tsk_479 0 tsk_479 1
+set scoreset 41 proband gametes tsk_331 0 tsk_331 1 tsk_487 0 tsk_487 1
+set scoreset 42 proband gametes tsk_331 0 tsk_331 1 tsk_490 0 tsk_490 1
+set scoreset 43 proband gametes tsk_331 0 tsk_331 1 tsk_493 0 tsk_493 1
+set scoreset 44 proband gametes tsk_333 0 tsk_333 1 tsk_497 0 tsk_497 1
+set scoreset 45 proband gametes tsk_334 0 tsk_334 1 tsk_485 0 tsk_485 1
+set scoreset 46 proband gametes tsk_338 0 tsk_338 1 tsk_499 0 tsk_499 1
+set scoreset 47 proband gametes tsk_339 0 tsk_339 1 tsk_476 0 tsk_476 1
+set scoreset 48 proband gametes tsk_345 0 tsk_345 1 tsk_490 0 tsk_490 1
+set scoreset 49 proband gametes tsk_349 0 tsk_349 1 tsk_481 0 tsk_481 1
+set scoreset 50 proband gametes tsk_353 0 tsk_353 1 tsk_478 0 tsk_478 1
+set scoreset 51 proband gametes tsk_354 0 tsk_354 1 tsk_486 0 tsk_486 1
+set scoreset 52 proband gametes tsk_356 0 tsk_356 1 tsk_493 0 tsk_493 1
+set scoreset 53 proband gametes tsk_357 0 tsk_357 1 tsk_477 0 tsk_477 1
+set scoreset 54 proband gametes tsk_362 0 tsk_362 1 tsk_486 0 tsk_486 1
+set scoreset 55 proband gametes tsk_363 0 tsk_363 1 tsk_485 0 tsk_485 1
+set scoreset 56 proband gametes tsk_367 0 tsk_367 1 tsk_478 0 tsk_478 1
+set scoreset 57 proband gametes tsk_367 0 tsk_367 1 tsk_482 0 tsk_482 1
+set scoreset 58 proband gametes tsk_367 0 tsk_367 1 tsk_486 0 tsk_486 1
+set scoreset 59 proband gametes tsk_370 0 tsk_370 1 tsk_475 0 tsk_475 1
+set scoreset 60 proband gametes tsk_371 0 tsk_371 1 tsk_479 0 tsk_479 1
+set scoreset 61 proband gametes tsk_375 0 tsk_375 1 tsk_491 0 tsk_491 1
+set scoreset 62 proband gametes tsk_380 0 tsk_380 1 tsk_496 0 tsk_496 1
+set scoreset 63 proband gametes tsk_383 0 tsk_383 1 tsk_487 0 tsk_487 1
+set scoreset 64 proband gametes tsk_383 0 tsk_383 1 tsk_492 0 tsk_492 1
+set scoreset 65 proband gametes tsk_386 0 tsk_386 1 tsk_476 0 tsk_476 1
+set scoreset 66 proband gametes tsk_387 0 tsk_387 1 tsk_484 0 tsk_484 1
+set scoreset 67 proband gametes tsk_387 0 tsk_387 1 tsk_485 0 tsk_485 1
+set scoreset 68 proband gametes tsk_387 0 tsk_387 1 tsk_499 0 tsk_499 1
+set scoreset 69 proband gametes tsk_399 0 tsk_399 1 tsk_486 0 tsk_486 1
+set scoreset 70 proband gametes tsk_400 0 tsk_400 1 tsk_481 0 tsk_481 1
+set scoreset 71 proband gametes tsk_406 0 tsk_406 1 tsk_487 0 tsk_487 1
+set scoreset 72 proband gametes tsk_407 0 tsk_407 1 tsk_497 0 tsk_497 1
+set scoreset 73 proband gametes tsk_412 0 tsk_412 1 tsk_482 0 tsk_482 1
+set scoreset 74 proband gametes tsk_422 0 tsk_422 1 tsk_487 0 tsk_487 1
+set scoreset 75 proband gametes tsk_423 0 tsk_423 1 tsk_481 0 tsk_481 1
+set scoreset 76 proband gametes tsk_429 0 tsk_429 1 tsk_486 0 tsk_486 1
+set scoreset 77 proband gametes tsk_431 0 tsk_431 1 tsk_499 0 tsk_499 1
+set scoreset 78 proband gametes tsk_433 0 tsk_433 1 tsk_486 0 tsk_486 1
+set scoreset 79 proband gametes tsk_435 0 tsk_435 1 tsk_481 0 tsk_481 1
+set scoreset 80 proband gametes tsk_436 0 tsk_436 1 tsk_480 0 tsk_480 1
+set scoreset 81 proband gametes tsk_436 0 tsk_436 1 tsk_485 0 tsk_485 1
+set scoreset 82 proband gametes tsk_440 0 tsk_440 1 tsk_483 0 tsk_483 1
+set scoreset 83 proband gametes tsk_446 0 tsk_446 1 tsk_477 0 tsk_477 1
+set scoreset 84 proband gametes tsk_448 0 tsk_448 1 tsk_487 0 tsk_487 1
+set scoreset 85 proband gametes tsk_448 0 tsk_448 1 tsk_489 0 tsk_489 1
+set scoreset 86 proband gametes tsk_449 0 tsk_449 1 tsk_475 0 tsk_475 1
+set scoreset 87 proband gametes tsk_451 0 tsk_451 1 tsk_487 0 tsk_487 1
+set scoreset 88 proband gametes tsk_451 0 tsk_451 1 tsk_494 0 tsk_494 1
+set scoreset 89 proband gametes tsk_453 0 tsk_453 1 tsk_479 0 tsk_479 1
+set scoreset 90 proband gametes tsk_454 0 tsk_454 1 tsk_477 0 tsk_477 1
+set scoreset 91 proband gametes tsk_454 0 tsk_454 1 tsk_497 0 tsk_497 1
+set scoreset 92 proband gametes tsk_456 0 tsk_456 1 tsk_493 0 tsk_493 1
+set scoreset 93 proband gametes tsk_457 0 tsk_457 1 tsk_485 0 tsk_485 1
+set scoreset 94 proband gametes tsk_461 0 tsk_461 1 tsk_487 0 tsk_487 1
+set scoreset 95 proband gametes tsk_462 0 tsk_462 1 tsk_489 0 tsk_489 1
+set scoreset 96 proband gametes tsk_462 0 tsk_462 1 tsk_494 0 tsk_494 1
+set scoreset 97 proband gametes tsk_464 0 tsk_464 1 tsk_481 0 tsk_481 1
+set scoreset 98 proband gametes tsk_471 0 tsk_471 1 tsk_483 0 tsk_483 1
+set scoreset 99 proband gametes tsk_471 0 tsk_471 1 tsk_497 0 tsk_497 1
+set scoreset 100 proband gametes tsk_472 0 tsk_472 1 tsk_491 0 tsk_491 1
+
+
+# The following Morgan parameter statement selects a subset of markers to
+# include in the output produced by ibd_haplo.
+
+select all markers

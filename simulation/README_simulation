@@ -1,0 +1,57 @@
+# Scripts to generate the moderately inbred (modf) and highly inbred (highf) simulated data sets
+
+# Packages and compilers used:
+- For the forward simulation:
+  - SLiM version 4.0.1
+- For recapitation, HBD segments computation and overlaying mutations:
+  - Python/3.9.6-GCCcore-11.2.0
+  - SciPy-bundle/2021.10-foss-2021b
+
+# Python external libraries:
+- tskit version: 0.5.4
+- msprime version: 1.2.0
+- pyslim version: 1.0b1
+
+# Needed files:
+seeds
+src_[scenario]/
+  fwrd.slim
+  recomb_rates.tsv
+  recap_w_pyslim.py
+  ibd_neumut.py
+  recodevcf.R
+  unifvariant_density.R 
+  fwrd.slim_parents
+  pedigree.py
+
+# To produce one replicate of the simulation
+    # 1. run foward simulation using SLiM
+      slim -t -m -s [seed] fwrd.slim
+	  
+      # It starts with an initial population of 10,000 diploid individuals with equal sex ratio, followed by reductions in the effective population size.
+      # In the highf scenario, equal sex ratio is maintained and the history includes 50 generations of Ne=1000, followed by 25 generations of Ne=500, 10 generations of Ne=200, 5 generations of Ne=15 and 10 generations of Ne=20.
+      # In the modf scenario, sex ratio is 0.1 for subsequent generations and the history includes 50 generations of Ne=1800 (N=5000; 500 males + 4500 females), followed by 30 generations of Ne=360 (N=1000; 100 males + 900 females), 10 generations of Ne=180 (N=500; 50 males + 450 females), and 10 generations of Ne=90 (N=250; 25 males + 225 females).
+ 
+    # 2. recapitation
+      python3 recap_w_pyslim.py [seed]
+
+    # 3. print HBD segments for individuals in the last generation and overlay mutations
+      python3 ibd_neumut.py [seed]
+
+    # 4. Recode #CHROM and POS field on the vcf file
+      Rscript recodevcf.R
+
+    # 5. Filter markers by MAF > 0.01 using PLINK and save AF for the remaining SNP
+      plink --vcf 'genotypes_tidy.vcf' --const-fid --chr-set 25 no-xy --a2-allele 'genotypes_ref_alt' 2 1 --make-bed --out plink
+      plink --bfile plink --chr-set 25 no-xy --keep-allele-order --snps-only 'just-acgt' --nonfounders --maf 0.01 --make-bed --out plink2
+      plink --bfile plink2 --chr-set 25 no-xy --keep-allele-order --nonfounders --freq --out freq
+
+    # 6. Sample SNPs to obtain a subset of markers with a rather uniform MAF distribution and the desired density (10 SNP/Mb)
+      Rscript unifvariant_density.R [seed]
+      rm missing.txt
+      plink --bfile plink2 --chr-set 25 no-xy --keep-allele-order --nonfounders --extract out_unifvariants_10s_mb.txt --make-bed --out plink3
+      plink --bfile plink3 --chr-set 25 no-xy --keep-allele-order --nonfounders --recode vcf-iid --out plink
+
+    # 7. Obtain a 15-generation pedigree for the offspring of the studied trios
+      slim -t -m -s [seed] fwrd.slim_parents
+      python3 pedigree.py
