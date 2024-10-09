@@ -9,6 +9,7 @@ positions <- seq(0, 2499999999, by = 100000000)
 chromosomes <- seq(1,length(positions))
 chr<- vcf$`#CHROM`
 posr<- vcf$`POS`
+posr2<- posr
 for (i in 1:length(positions)) {
   chr[posr >= positions[i] & posr < positions[i] + 100000000 - 1] <- chromosomes[i]
   posr2[posr >= positions[i] & posr < positions[i] + 100000000 - 1] <- posr[posr >= positions[i] & posr < positions[i] + 100000000 - 1] - positions[i] + 1
