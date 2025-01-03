@@ -10,6 +10,7 @@ glen = 2500 # in MB
 
 age <- fread('../predict/input/out_nodeage.txt.gz')
 setnames(age, c('node', 'age'))
+age[, age := round(age)]
 
 segments <- fread('../predict/input/out_segments.txt.gz', 
                    colClasses = c('integer', 'integer', 'integer', 'numeric', 'numeric', 'integer'))
