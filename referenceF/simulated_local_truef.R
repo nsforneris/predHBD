@@ -8,6 +8,7 @@ library(data.table)
 
 age <- fread('../predict/input/out_nodeage.txt.gz')
 setnames(age, c('node', 'age'))
+age[, age := round(age)]
 seg <- fread('../predict/input/out_segments.txt.gz',
                    colClasses = c('integer', 'integer', 'integer', 'numeric', 'numeric', 'integer'))
 setnames(seg, c('ind', 'nod1', 'nod2', 'ini', 'fin', 'node'))
@@ -20,7 +21,7 @@ outfi<- "loc_truef"
 # variant info #
 system("zcat ../predict/input/out_variant_info.txt.gz | awk '{print $1, $2}' > vv")
 varinfo<- fread('vv', colClasses = c('numeric', 'integer'))
-setnames(varinfo, c('pos','ord')) # pos mathces that of seg table
+setnames(varinfo, c('pos','ord')) # pos matches that of seg table
 varinfo[, name := paste0('var', ord)]
 varinfo[, `:=`(ord = NULL)]
 
